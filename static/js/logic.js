@@ -37,8 +37,9 @@ d3.json(Geodata).then(function(response) {
 
     let circleOptions = {
       radius: radius(mag),
-      color: "green"
-    };
+      color: "green",
+        };
+
     let marker = L.circleMarker({lat: lat, lng: lon}, circleOptions);
     marker.bindPopup(
       `<h3> ${feature.properties.place} </h3> <hr> <h2> ${mag} </h2>`
@@ -51,29 +52,25 @@ d3.json(Geodata).then(function(response) {
   //    collapsed: false
   //  }).addTo(map);
 
-//    var legend = L.control({ position: 'bottomright' })
-//   legend.onAdd = function (map) {
-//     var div = L.DomUtil.create('div', 'info legend')
-//     var limits = choroplethLayer.options.limits
-//     var colors = choroplethLayer.options.colors
-//     var labels = []
+    var legend = L.control({position: 'bottomright'});
 
-//     let legendInfo = "<h1>Population with Children<br />(ages 6-17)</h1>" +
-//     "<div class=\"labels\">" +
-//       "<div class=\"min\">" + limits[0] + "</div>" +
-//       "<div class=\"max\">" + limits[limits.length - 1] + "</div>" +
-//     "</div>";
+    legend.onAdd = function (map) {
 
-//     div.innerHTML = legendInfo;
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 10, 30, 50, 70, 90],
+        labels = [];
 
-//     limits.forEach(function(limit, index) {
-//       labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
-//     });
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
 
-//     div.innerHTML += "<ul>" + labels.join("") + "</ul>";
-//     return div;
-// }
-// legend.addTo(map)
+    return div;
+};
+
+legend.addTo(map);
 
 })
 
