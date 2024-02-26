@@ -24,10 +24,11 @@ function radius(magnitude) {
 
 function getColor(magnitude) {
   if (magnitude <= 10) return "green";
-  else if (magnitude >= 10) return "yellow";
-  else if (magnitude >= 50) return "orange";
-  else if (magnitude >= 90) return "red";
-  else return "white"
+  else if (magnitude > 10 && magnitude <= 30) return "yellow";
+  else if (magnitude > 30 && magnitude <= 50) return "orange";
+  else if (magnitude > 50 && magnitude <= 70) return "red";
+  else if (magnitude > 70 && magnitude <= 90) return "purple";
+  else return "blue"; // Add more color categories as needed
 }
 
 d3.json(Geodata).then(function(response) {
@@ -45,7 +46,8 @@ d3.json(Geodata).then(function(response) {
 
     let circleOptions = {
       radius: radius(mag),
-      color: getColor(mag),
+      fillcolor: getColor(mag),
+      color: "black",
         };
 
     let marker = L.circleMarker({lat: lat, lng: lon}, circleOptions);
@@ -56,9 +58,9 @@ d3.json(Geodata).then(function(response) {
    
     });
    
-   L.control.layers(baseMaps, {
-     collapsed: false
-   }).addTo(map);
+   //L.control.layers(baseMaps, {
+   //  collapsed: false
+   //}).addTo(map);
 
     var legend = L.control({position: 'bottomright'});
 
