@@ -37,7 +37,7 @@ d3.json(Geodata).then(function(response) {
 
     let circleOptions = {
       radius: radius(mag),
-      color: "Earth"
+      color: "green"
     };
     let marker = L.circleMarker({lat: lat, lng: lon}, circleOptions);
     marker.bindPopup(
