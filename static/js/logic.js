@@ -31,11 +31,11 @@ function getColor() {
   return color;
 }
 
-function chooseColor(mag) {
-  if (mag <= 10) return "green";
-  else if (mag >= 10) return "yellow";
-  else if (mag >= 70) return "orange";
-  else if (mag >= 90) return "red";
+function chooseColor(magnitude) {
+  if (magnitude <= 10) return "green";
+  else if (magnitude >= 10) return "yellow";
+  else if (magnitude >= 50) return "orange";
+  else if (magnitude >= 90) return "red";
   else return "white"
 }
 
@@ -54,7 +54,7 @@ d3.json(Geodata).then(function(response) {
 
     let circleOptions = {
       radius: radius(mag),
-      color: "green",
+      color: chooseColor(mag),
         };
 
     let marker = L.circleMarker({lat: lat, lng: lon}, circleOptions);
