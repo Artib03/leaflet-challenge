@@ -46,7 +46,7 @@ d3.json(Geodata).then(function(response) {
 
     let circleOptions = {
       radius: radius(mag),
-      fillColor: "rgb(194,215,37",
+      fillColor: "#d8d83b" ,//getColor(feature.properties.magnitude),
       color: "#000",
       weight: 1,
       opacity: 1,
@@ -60,10 +60,6 @@ d3.json(Geodata).then(function(response) {
     marker.addTo(map);
    
     });
-   
-   //L.control.layers(baseMaps, {
-   //  collapsed: false
-   //}).addTo(map);
 
     var legend = L.control({position: 'bottomright'});
 
